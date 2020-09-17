@@ -18,7 +18,13 @@ const App = () => {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = React.useState('React');
+  const [searchTerm, setSearchTerm] = React.useState(
+    localStorage.getItem('search') || 'React'
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem('search', searchTerm);
+  }, [searchTerm]);
 
   const handleSearch = event => {
     setSearchTerm(event.target.value);
@@ -41,28 +47,31 @@ const App = () => {
   );
 }
 
-const Search = props => {
+const Search = ({searchTerm, onSearch}) => {
   return(
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={props.onSearch} value={props.searchTerm}/>
+      <input id="search" type="text" onChange={onSearch} value={searchTerm}/>
 
       <p>
-        Searching for <strong>{props.searchTerm}</strong>.
+        Searching for <strong>{searchTerm}</strong>.
       </p>
     </div>
   )
 }
 
-const List = props =>
-  props.list.map(item =>
-  <div key={item.objectID}>
-    <span><a href={item.url}>{item.title}</a> </span>
+const List = ({ list }) =>
+  list.map(item => <Item key={item.objectID} item={item} />);
+
+const Item = ({ item }) => (
+  <div>
+    <span>
+      <a href={item.url}>{item.title}</a>
+    </span>
     <span>{item.author}</span>
     <span>{item.num_comments}</span>
     <span>{item.points}</span>
   </div>
-)
-
+);
 
 export default App;

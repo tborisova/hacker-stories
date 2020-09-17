@@ -25,24 +25,32 @@ const newNumbers = numbers.map(function(number) {
 
 console.log(newNumbers);
 
-const App = () => (
-  <div>
-    <h1>My Hacker Stories</h1>
+const App = () => {
+  return (
+    <div>
+      <h1>My Hacker Stories</h1>
 
-    <Search/>
+      <Search/>
 
-    <hr />
+      <hr />
 
-    <List/>
-  </div>
-)
+      <List/>
+    </div>
+  );
+}
 
-const Search = () => (
-  <div>
-    <label htmlFor="search">Search: </label>
-    <input id="search" type="text" />
-  </div>
-)
+const Search = () => {
+  const handleChange = event => {
+    console.log(event.target.value);
+  };
+
+  return(
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" onChange={handleChange}/>
+    </div>
+  )
+}
 
 const List = () =>
   list.map(item =>

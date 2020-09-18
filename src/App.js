@@ -48,11 +48,6 @@ const App = () => {
         <strong>Search:</strong>
       </InputWithLabel>
 
-
-      <InputWithLabel id="email" value="Email">
-        <strong>Email:</strong>
-      </InputWithLabel>
-
       <p>
         Searching for <strong>{searchTerm}</strong>.
       </p>
